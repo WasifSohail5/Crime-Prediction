@@ -1,76 +1,111 @@
-# Crime Prediction Using Neural Networks 👮♂️🔍
+# 🔍 Crime Prediction Using Neural Networks
 
-![Crime Prediction Banner](https://via.placeholder.com/800x200?text=Crime+Prediction+Using+Neural+Networks)
+![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)
+![PyTorch](https://img.shields.io/badge/PyTorch-1.9+-red.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-## Table of Contents
-1. [Introduction](#introduction-)
-2. [Dataset](#dataset-)
-3. [Methodology](#methodology-)
-4. [Models](#models-)
-5. [Results](#results-)
-6. [How to Run](#how-to-run-)
-7. [References](#references-)
+> A neural network approach to predicting crime types and locations based on historical data from Detroit
 
-## Introduction 🚀
-Welcome to the **Crime-Prediction** project! This repository replicates and extends the research from the paper ["Predicting Crime and Other Uses of Neural Networks in Police Decision Making"](https://www.frontiersin.org/articles/10.3389/fpsyg.2021.587943/full) by Steven Walczak. 
+## 📑 Table of Contents
 
-Using neural networks, we predict:
-- 🕵️ Crime types
-- 📍 Crime locations
+- [Introduction](#introduction)
+- [Dataset](#dataset)
+- [Methodology](#methodology)
+- [Models](#models)
+- [Results](#results)
+- [How to Run](#how-to-run)
+- [References](#references)
 
-based on historical crime data from **Detroit (2016-2020)**. Explore this README to learn about:
-- Project's purpose
-- Methodology
-- Model architectures
-- Performance results
-- How to get started
+## 🔎 Introduction
 
-## Dataset 📊
-We use the **RMS Crime Incidents** dataset from the City of Detroit, containing:
+Welcome to the **Crime-Prediction** project! This repository replicates and extends the research from the paper "Predicting Crime and Other Uses of Neural Networks in Police Decision Making" by Steven Walczak. Using neural networks, we predict crime types and locations based on historical crime data from Detroit. Explore this README to learn about the project's purpose, methodology, models, results, and how to get started with the code!
 
-| Feature | Description |
-|---------|-------------|
-| 📅 Date/Time | Incident timestamp |
-| 🏙️ Location | Zip code |
-| ⚖️ Crime Type | Offense category |
+## 📊 Dataset
 
-**Dataset Statistics:**
-- Time period: 2016-2020
-- Crime categories: 27 (filtered >600 incidents each)
-- Zip codes: 30
+The project uses the RMS Crime Incidents dataset from the City of Detroit, spanning 2016 to 2020. It includes details like:
 
-📥 **Download:** [ResearchGate Dataset Link](https://www.researchgate.net/publication/123456789)
+- Date and time of incidents
+- Location (zip code)
+- Crime type
 
-## Methodology 🧠
-Our approach builds on the paper's methodology with enhancements:
+You can download the dataset here: [ResearchGate](https://www.researchgate.net/publication/354071957_Detroit_Crime_Dataset).
 
-### Data Preprocessing
-1. Extracted key columns:
-   - incident_day_of_week
-   - incident_hour_of_day  
-   - zip_code
-   - offense_category
+## 🔬 Methodology
 
-2. Filtered crime categories (600+ incidents)
-3. Balanced training set
-4. One-hot encoded categorical variables
-5. Kept hour as numerical feature
+Our approach builds on the paper's methodology with slight tweaks:
 
-### Crime Type Prediction Model
-graph LR
-    A[38 Input Features] --> B[12-node Hidden Layer]
-    B --> C[4-node Hidden Layer]
-    C --> D[27 Crime Categories]
+### Data Preprocessing:
 
-### Location Prediction Model
-graph LR
-    A[35 Input Features] --> B[27-node Hidden Layer]
-    B --> C[6-node Hidden Layer]
-    C --> D[30 Zip Codes]
+- Extracted key columns: `incident_day_of_week`, `incident_hour_of_day`, `zip_code`, `offense_category`.
+- Filtered to include only crime categories with 600+ incidents (27 categories total).
+- Balanced the training set by sampling from each category.
+- One-hot encoded categorical variables (`zip_code`, `day_of_week`, `crime_category`).
+- Kept hour as a numerical feature.
 
-### Clone the Repository
+### Model Training:
+
+- Implemented Multi-Layer Perceptrons (MLPs) using PyTorch.
+- Applied early stopping to avoid overfitting.
+
+## 🧠 Models
+
+We trained two neural network models:
+
+### Crime Type Prediction Model:
+
+- **Architecture**: Two-hidden-layer MLP (12 nodes, 4 nodes).
+- **Input**: 38 features (30 zip codes + 7 days + 1 hour).
+- **Output**: 27 crime categories.
+
+### Location Prediction Model:
+
+- **Architecture**: Two-hidden-layer MLP (27 nodes, 6 nodes).
+- **Input**: 35 features (27 crime categories + 7 days + 1 hour).
+- **Output**: 30 zip codes.
+
+## 📈 Results
+
+Here's how the models performed on the validation set:
+
+| Model | Accuracy |
+|-------|----------|
+| Crime Type Prediction | ~16.4% |
+| Location Prediction (Exact) | ~8.2% |
+
+These results align with the paper's findings, showing the models' potential to predict crime patterns with limited data.
+
+## 🚀 How to Run
+
+Ready to dive in? Follow these steps to run the project locally:
+
+### 1. Clone the Repository:
+
+```bash
 git clone https://github.com/WasifSohail5/Crime-Prediction.git
 cd Crime-Prediction
+```
 
-### Install Dependencies
+### 2. Install Dependencies:
+
+```bash
 pip install -r requirements.txt
+```
+
+### 3. Download the Dataset:
+
+- Get it from [ResearchGate](https://www.researchgate.net/publication/354071957_Detroit_Crime_Dataset).
+- Place it in the `data/` folder.
+
+### 4. Run the Code:
+
+- Open `crime_prediction.ipynb` in Jupyter Notebook.
+- Execute the cells step-by-step to preprocess data, train models, and see the results.
+
+## 📚 References
+
+1. Walczak, S. (2021). Predicting Crime and Other Uses of Neural Networks in Police Decision Making. Frontiers in Psychology, 12, 587943. [Link](https://doi.org/10.3389/fpsyg.2021.587943)
+2. Dataset: RMS Crime Incidents, City of Detroit. [Link](https://data.detroitmi.gov/datasets/rms-crime-incidents/explore)
+
+---
+
+Happy coding! Feel free to contribute or reach out with questions via the GitHub issues page.
