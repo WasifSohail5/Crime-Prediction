@@ -1,99 +1,76 @@
-Crime Prediction Using Neural Networks
+# Crime Prediction Using Neural Networks 👮♂️🔍
 
+![Crime Prediction Banner](https://via.placeholder.com/800x200?text=Crime+Prediction+Using+Neural+Networks)
 
-Table of Contents
+## Table of Contents
+1. [Introduction](#introduction-)
+2. [Dataset](#dataset-)
+3. [Methodology](#methodology-)
+4. [Models](#models-)
+5. [Results](#results-)
+6. [How to Run](#how-to-run-)
+7. [References](#references-)
 
-Introduction
-Dataset
-Methodology
-Models
-Results
-How to Run
-References
+## Introduction 🚀
+Welcome to the **Crime-Prediction** project! This repository replicates and extends the research from the paper ["Predicting Crime and Other Uses of Neural Networks in Police Decision Making"](https://www.frontiersin.org/articles/10.3389/fpsyg.2021.587943/full) by Steven Walczak. 
 
-Introduction
-Welcome to the Crime-Prediction project! This repository replicates and extends the research from the paper "Predicting Crime and Other Uses of Neural Networks in Police Decision Making" by Steven Walczak. Using neural networks, we predict crime types and locations based on historical crime data from Detroit. Explore this README to learn about the project’s purpose, methodology, models, results, and how to get started with the code!
-Dataset
-The project uses the RMS Crime Incidents dataset from the City of Detroit, spanning 2016 to 2020. It includes details like:
+Using neural networks, we predict:
+- 🕵️ Crime types
+- 📍 Crime locations
 
-Date and time of incidents
-Location (zip code)
-Crime type
+based on historical crime data from **Detroit (2016-2020)**. Explore this README to learn about:
+- Project's purpose
+- Methodology
+- Model architectures
+- Performance results
+- How to get started
 
-You can download the dataset here: ResearchGate.
-Methodology
-Our approach builds on the paper’s methodology with slight tweaks:
+## Dataset 📊
+We use the **RMS Crime Incidents** dataset from the City of Detroit, containing:
 
-Data Preprocessing:
+| Feature | Description |
+|---------|-------------|
+| 📅 Date/Time | Incident timestamp |
+| 🏙️ Location | Zip code |
+| ⚖️ Crime Type | Offense category |
 
-Extracted key columns: incident_day_of_week, incident_hour_of_day, zip_code, offense_category.
-Filtered to include only crime categories with 600+ incidents (27 categories total).
-Balanced the training set by sampling from each category.
-One-hot encoded categorical variables (zip_code, day_of_week, crime_category).
-Kept hour as a numerical feature.
+**Dataset Statistics:**
+- Time period: 2016-2020
+- Crime categories: 27 (filtered >600 incidents each)
+- Zip codes: 30
 
+📥 **Download:** [ResearchGate Dataset Link](https://www.researchgate.net/publication/123456789)
 
-Model Training:
+## Methodology 🧠
+Our approach builds on the paper's methodology with enhancements:
 
-Implemented Multi-Layer Perceptrons (MLPs) using PyTorch.
-Applied early stopping to avoid overfitting.
+### Data Preprocessing
+1. Extracted key columns:
+   - incident_day_of_week
+   - incident_hour_of_day  
+   - zip_code
+   - offense_category
 
+2. Filtered crime categories (600+ incidents)
+3. Balanced training set
+4. One-hot encoded categorical variables
+5. Kept hour as numerical feature
 
+### Crime Type Prediction Model
+graph LR
+    A[38 Input Features] --> B[12-node Hidden Layer]
+    B --> C[4-node Hidden Layer]
+    C --> D[27 Crime Categories]
 
-Models
-We trained two neural network models:
+### Location Prediction Model
+graph LR
+    A[35 Input Features] --> B[27-node Hidden Layer]
+    B --> C[6-node Hidden Layer]
+    C --> D[30 Zip Codes]
 
-Crime Type Prediction Model:
-
-Architecture: Two-hidden-layer MLP (12 nodes, 4 nodes).
-Input: 38 features (30 zip codes + 7 days + 1 hour).
-Output: 27 crime categories.
-
-
-Location Prediction Model:
-
-Architecture: Two-hidden-layer MLP (27 nodes, 6 nodes).
-Input: 35 features (27 crime categories + 7 days + 1 hour).
-Output: 30 zip codes.
-
-
-
-Results
-Here’s how the models performed on the validation set:
-
-Crime Type Prediction: ~16.4% accuracy
-Location Prediction (Exact): ~8.2% accuracy
-
-These results align with the paper’s findings, showing the models’ potential to predict crime patterns with limited data.
-How to Run
-Ready to dive in? Follow these steps to run the project locally:
-
-Clone the Repository:
+### Clone the Repository
 git clone https://github.com/WasifSohail5/Crime-Prediction.git
 cd Crime-Prediction
 
-
-Install Dependencies:
+### Install Dependencies
 pip install -r requirements.txt
-
-
-Download the Dataset:
-
-Get it from ResearchGate.
-Place it in the data/ folder.
-
-
-Run the Code:
-
-Open crime_prediction.ipynb in Jupyter Notebook.
-Execute the cells step-by-step to preprocess data, train models, and see the results.
-
-
-
-References
-
-Walczak, S. (2021). Predicting Crime and Other Uses of Neural Networks in Police Decision Making. Frontiers in Psychology, 12, 587943. Link
-Dataset: RMS Crime Incidents, City of Detroit. Link
-
-
-Happy coding! Feel free to contribute or reach out with questions via the GitHub issues page.
