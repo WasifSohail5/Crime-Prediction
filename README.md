@@ -12,6 +12,7 @@
 - [Dataset](#dataset)
 - [Methodology](#methodology)
 - [Models](#models)
+- [Model Flow Diagrams](#model-flow-diagrams)
 - [Results](#results)
 - [How to Run](#how-to-run)
 - [References](#references)
@@ -62,6 +63,70 @@ We trained two neural network models:
 - **Architecture**: Two-hidden-layer MLP (27 nodes, 6 nodes).
 - **Input**: 35 features (27 crime categories + 7 days + 1 hour).
 - **Output**: 30 zip codes.
+
+## 📊 Model Flow Diagrams
+
+### Crime Type Prediction Model
+
+```mermaid
+graph LR
+    A[Input Layer<br>38 features] --> B[Hidden Layer 1<br>12 neurons]
+    B --> C[Hidden Layer 2<br>4 neurons]
+    C --> D[Output Layer<br>27 crime categories]
+    
+    subgraph Input Features
+        E[Zip Codes<br>30 features]
+        F[Day of Week<br>7 features]
+        G[Hour<br>1 feature]
+    end
+    
+    E --> A
+    F --> A
+    G --> A
+    
+    subgraph Processing
+        H[ReLU Activation]
+        I[Dropout p=0.2]
+        J[Adam Optimizer]
+    end
+    
+    B --- H
+    C --- H
+    B --- I
+    C --- I
+    D --- J
+```
+
+### Location Prediction Model
+
+```mermaid
+graph LR
+    A[Input Layer<br>35 features] --> B[Hidden Layer 1<br>27 neurons]
+    B --> C[Hidden Layer 2<br>6 neurons]
+    C --> D[Output Layer<br>30 zip codes]
+    
+    subgraph Input Features
+        E[Crime Categories<br>27 features]
+        F[Day of Week<br>7 features]
+        G[Hour<br>1 feature]
+    end
+    
+    E --> A
+    F --> A
+    G --> A
+    
+    subgraph Processing
+        H[ReLU Activation]
+        I[Dropout p=0.2]
+        J[Adam Optimizer]
+    end
+    
+    B --- H
+    C --- H
+    B --- I
+    C --- I
+    D --- J
+```
 
 ## 📈 Results
 
