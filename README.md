@@ -135,7 +135,7 @@ Here's how the models performed on the validation set:
 | Model | Accuracy |
 |-------|----------|
 | Crime Type Prediction | ~8.2% |
-| Location Prediction (Exact) | ~8.2% |
+| Location Prediction (Exact) | ~8.1% |
 
 These results align with the paper's findings, showing the models' potential to predict crime patterns with limited data.
 
