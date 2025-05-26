@@ -56,12 +56,12 @@ We trained two neural network models:
 
 - **Architecture**: Two-hidden-layer MLP (12 nodes, 4 nodes).
 - **Input**: 38 features (30 zip codes + 7 days + 1 hour).
-- **Output**: 27 crime categories.
+- **Output**: 25 crime categories.
 
 ### Location Prediction Model:
 
 - **Architecture**: Two-hidden-layer MLP (27 nodes, 6 nodes).
-- **Input**: 35 features (27 crime categories + 7 days + 1 hour).
+- **Input**: 33 features (25 crime categories + 7 days + 1 hour).
 - **Output**: 30 zip codes.
 
 ## 📊 Model Flow Diagrams
@@ -72,7 +72,7 @@ We trained two neural network models:
 graph LR
     A[Input Layer<br>38 features] --> B[Hidden Layer 1<br>12 neurons]
     B --> C[Hidden Layer 2<br>4 neurons]
-    C --> D[Output Layer<br>27 crime categories]
+    C --> D[Output Layer<br>25 crime categories]
     
     subgraph Input Features
         E[Zip Codes<br>30 features]
@@ -101,12 +101,12 @@ graph LR
 
 ```mermaid
 graph LR
-    A[Input Layer<br>35 features] --> B[Hidden Layer 1<br>27 neurons]
+    A[Input Layer<br>33 features] --> B[Hidden Layer 1<br>27 neurons]
     B --> C[Hidden Layer 2<br>6 neurons]
     C --> D[Output Layer<br>30 zip codes]
     
     subgraph Input Features
-        E[Crime Categories<br>27 features]
+        E[Crime Categories<br>25 features]
         F[Day of Week<br>7 features]
         G[Hour<br>1 feature]
     end
@@ -134,7 +134,7 @@ Here's how the models performed on the validation set:
 
 | Model | Accuracy |
 |-------|----------|
-| Crime Type Prediction | ~16.4% |
+| Crime Type Prediction | ~8.2% |
 | Location Prediction (Exact) | ~8.2% |
 
 These results align with the paper's findings, showing the models' potential to predict crime patterns with limited data.
